@@ -7,6 +7,7 @@ const path = require('path'),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const isDev = process.env.NODE_ENV  === "DEV";
+const urlShortener = process.env.URL_SHORTENER || "google";
 
 const outputPathRelative = 'dist/';
 const staticRelative = 'static/';
@@ -97,7 +98,8 @@ module.exports = [
                 goldenlayout:  path.resolve(__dirname, 'node_modules/golden-layout/'),
                 lzstring:  path.resolve(__dirname, 'node_modules/lz-string/'),
                 filesaver:  path.resolve(__dirname, 'node_modules/file-saver/'),
-                vs: path.resolve(__dirname, 'node_modules/monaco-editor/min/vs')
+                vs: path.resolve(__dirname, 'node_modules/monaco-editor/min/vs'),
+                urlshorten: path.resolve(__dirname, 'static/urlshorten-' + urlShortener + '.js')
             }
         },
         stats: "errors-only",
