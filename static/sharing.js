@@ -25,7 +25,6 @@
 "use strict";
 var $ = require('jquery');
 var _ = require('underscore');
-var options = require('options');
 var shortenURL = require('urlshorten-google');
 var Components = require('components');
 var url = require('./url');
@@ -131,14 +130,11 @@ function getLinks(layout, done) {
         Embed: '<iframe width="800px" height="200px" src="' + getEmbeddedUrl(layout, false) + '"></iframe>',
         'Embed (RO)': '<iframe width="800px" height="200px" src="' + getEmbeddedUrl(layout, true) + '"></iframe>'
     };
-    if (!options.gapiKey) {
-        done(result);
-    } else {
-        shortenURL(result.Full, function (shorter) {
+    shortenURL(result.Full, function (shorter) {
+        if (shorter)
             result.Short = shorter;
-            done(result);
-        });
-    }
+        done(result);
+    });
 }
 
 module.exports = {
